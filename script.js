@@ -4,7 +4,7 @@ const formEl = document.querySelector("form");
 const searchInputEl = document.getElementById("search-input");
 const searchResults = document.querySelector(".search-results");
 const showMoreBtnEl = document.getElementById("showmore-btn");
-
+const loader = document.querySelector(".loader")
 let inputData = "";
 let page = 1;
 
@@ -19,7 +19,10 @@ async function searchImages() {
     inputData = searchInputEl.value;
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accessKey}`;
     const data = await fetch(url);
+    loader.style.display="grid"
     const parsedData = await data.json();
+    loader.style.display="none"
+
 
     if (page === 1) {
         searchResults.innerHTML = ""
